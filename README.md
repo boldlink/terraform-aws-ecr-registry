@@ -16,13 +16,16 @@ Examples available [`here`]github.com/boldlink/terraform-aws-ecr-registry//tree/
 ```console
 module "minimum" {
   source = "./../../"
-  scan_filters = [
-    {
-      scan_frequency = "SCAN_ON_PUSH"
-      filter         = "*"
-      filter_type    = "WILDCARD"
-    },
-  ]
+  scanning_configuration = {
+    rules = [
+      {
+        scan_frequency = "SCAN_ON_PUSH"
+        repository_filter = {
+          filter      = "*"
+          filter_type = "WILDCARD"
+        }
+      }]
+  }
 }
 ```
 ## Documentation
@@ -43,7 +46,7 @@ module "minimum" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.17.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.18.0 |
 
 ## Modules
 
@@ -62,13 +65,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_destination"></a> [destination](#input\_destination) | A list of destinations to replicate to. | <pre>list(object({<br>    registry_id = string<br>    region      = string<br>  }))</pre> | `[]` | no |
 | <a name="input_ecr_repository_prefix"></a> [ecr\_repository\_prefix](#input\_ecr\_repository\_prefix) | (Required, Forces new resource) The repository name prefix to use when caching images from the source registry. | `string` | `""` | no |
 | <a name="input_enable_pull_through_cache_rule"></a> [enable\_pull\_through\_cache\_rule](#input\_enable\_pull\_through\_cache\_rule) | whether to enable pull through cache rule | `bool` | `false` | no |
 | <a name="input_registry_policy"></a> [registry\_policy](#input\_registry\_policy) | (Required) The policy document. This is a JSON formatted string | `string` | `null` | no |
-| <a name="input_repository_filter"></a> [repository\_filter](#input\_repository\_filter) | Repository filters for registry Replication configuration. | <pre>list(object({<br>    filter      = string<br>    filter_type = string<br>  }))</pre> | `[]` | no |
-| <a name="input_scan_filters"></a> [scan\_filters](#input\_scan\_filters) | A list of repository filter to scan on push, scan continuous Wildcard character is allowed | `any` | `[]` | no |
-| <a name="input_scan_type"></a> [scan\_type](#input\_scan\_type) | (Required) the scanning type to set for the registry. Can be either ENHANCED or BASIC. | `string` | `"ENHANCED"` | no |
+| <a name="input_replication_configuration"></a> [replication\_configuration](#input\_replication\_configuration) | replication configuration settings | `any` | `{}` | no |
+| <a name="input_scanning_configuration"></a> [scanning\_configuration](#input\_scanning\_configuration) | scanning configuration settings | `any` | `{}` | no |
 | <a name="input_upstream_registry_url"></a> [upstream\_registry\_url](#input\_upstream\_registry\_url) | (Required, Forces new resource) The registry URL of the upstream public registry to use as the source. | `string` | `""` | no |
 
 ## Outputs

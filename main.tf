@@ -1,23 +1,19 @@
 # Scanning configuration
 resource "aws_ecr_registry_scanning_configuration" "this" {
-  scan_type = var.scan_type
+  count     = length(var.scanning_configuration) > 0 ? 1 : 0
+  scan_type = try(var.scanning_configuration["scan_type"], "ENHANCED")
 
   dynamic "rule" {
-    for_each = var.scan_filters
+    for_each = lookup(var.scanning_configuration, "rules", null)
     content {
       scan_frequency = rule.value.scan_frequency
 
       repository_filter {
 
-        filter      = rule.value.filter
-        filter_type = try(rule.value.filter_type, "WILDCARD")
+        filter      = rule.value.repository_filter.filter
+        filter_type = rule.value.repository_filter.filter_type
       }
     }
-  }
-  lifecycle {
-    ignore_changes = [
-      rule,
-    ]
   }
 }
 
@@ -36,21 +32,24 @@ resource "aws_ecr_pull_through_cache_rule" "this" {
 
 # Replication configuration
 resource "aws_ecr_replication_configuration" "this" {
-  count = length(var.destination) > 0 ? 1 : 0
+  count = length(var.replication_configuration) > 0 ? 1 : 0
   replication_configuration {
-    rule {
-      dynamic "destination" {
-        for_each = var.destination
-        content {
-          region      = destination.value.region
-          registry_id = destination.value.registry_id
+    dynamic "rule" {
+      for_each = try([var.replication_configuration["rule"]], [])
+      content {
+        dynamic "destination" {
+          for_each = lookup(rule.value, "destinations", [])
+          content {
+            region      = destination.value.region
+            registry_id = destination.value.registry_id
+          }
         }
-      }
-      dynamic "repository_filter" {
-        for_each = try(var.repository_filter, [])
-        content {
-          filter      = lookup(repository_filter.value, "filter", null)
-          filter_type = lookup(repository_filter.value, "filter_type", "PREFIX_MATCH")
+        dynamic "repository_filter" {
+          for_each = lookup(rule.value, "repository_filters", [])
+          content {
+            filter      = try(repository_filter.value.filter, null)
+            filter_type = try(repository_filter.value.filter_type, "PREFIX_MATCH")
+          }
         }
       }
     }

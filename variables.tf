@@ -1,14 +1,8 @@
 # scanning configuration
-variable "scan_type" {
-  description = " (Required) the scanning type to set for the registry. Can be either ENHANCED or BASIC."
-  type        = string
-  default     = "ENHANCED"
-}
-
-variable "scan_filters" {
-  description = "A list of repository filter to scan on push, scan continuous Wildcard character is allowed"
+variable "scanning_configuration" {
   type        = any
-  default     = []
+  description = "scanning configuration settings"
+  default     = {}
 }
 
 # ECR registry policy
@@ -38,20 +32,8 @@ variable "upstream_registry_url" {
 }
 
 # Replication configuration
-variable "destination" {
-  description = "A list of destinations to replicate to."
-  type = list(object({
-    registry_id = string
-    region      = string
-  }))
-  default = []
-}
-
-variable "repository_filter" {
-  description = "Repository filters for registry Replication configuration."
-  type = list(object({
-    filter      = string
-    filter_type = string
-  }))
-  default = []
+variable "replication_configuration" {
+  type        = any
+  description = "replication configuration settings"
+  default     = {}
 }
