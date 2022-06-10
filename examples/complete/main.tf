@@ -1,3 +1,6 @@
+provider "aws" {
+  region  = "eu-west-1"
+}
 module "complete" {
   source                = "./../../"
   ecr_repository_prefix = "ecr-public"
