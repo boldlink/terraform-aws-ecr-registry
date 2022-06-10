@@ -2,6 +2,7 @@
 provider "aws" {
   region = "eu-west-2"
 }
+
 module "minimum" {
   source = "./../../"
   scanning_configuration = {
