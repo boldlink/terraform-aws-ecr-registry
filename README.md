@@ -8,7 +8,7 @@
 
 This module provides an Elastic Container Registry Scanning Configuration, Policy, Pull Through Cache Rule and Replication Configuration.
 
-Examples available [`here`](github.com/boldlink/terraform-aws-ecr-registry//tree/main/examples)
+Examples available [`here`](https://github.com/boldlink/terraform-aws-ecr-registry/tree/main/examples)
 
 ## Usage
 *NOTE*: These examples use the latest version of this module
