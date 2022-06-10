@@ -14,6 +14,11 @@ resource "aws_ecr_registry_scanning_configuration" "this" {
       }
     }
   }
+  lifecycle {
+    ignore_changes = [
+      rule,
+    ]
+  }
 }
 
 # ECR registry policy
