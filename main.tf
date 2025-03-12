@@ -9,7 +9,6 @@ resource "aws_ecr_registry_scanning_configuration" "this" {
       scan_frequency = rule.value.scan_frequency
 
       repository_filter {
-
         filter      = rule.value.repository_filter.filter
         filter_type = rule.value.repository_filter.filter_type
       }
@@ -17,13 +16,7 @@ resource "aws_ecr_registry_scanning_configuration" "this" {
   }
 }
 
-# ECR registry policy
-resource "aws_ecr_registry_policy" "this" {
-  count  = var.registry_policy != null ? 1 : 0
-  policy = var.registry_policy
-}
-
-#  Pull through cache rule
+# Pull through cache rule
 resource "aws_ecr_pull_through_cache_rule" "this" {
   count                 = var.enable_pull_through_cache_rule ? 1 : 0
   ecr_repository_prefix = var.ecr_repository_prefix
@@ -54,4 +47,27 @@ resource "aws_ecr_replication_configuration" "this" {
       }
     }
   }
+}
+
+# ECR Repository with encryption always enabled (optional)
+resource "aws_ecr_repository" "this" {
+  count                = var.repository_name != "" ? 1 : 0
+  name                 = var.repository_name
+  image_tag_mutability = var.image_tag_mutability
+
+  encryption_configuration {
+    encryption_type = var.encryption_type
+    # When using KMS, specify the kms_key; otherwise, use null.
+    kms_key = var.encryption_type == "KMS" ? var.kms_key_id : null
+  }
+
+  tags = var.tags
+}
+
+
+# ECR Repository Policy (optional)
+resource "aws_ecr_repository_policy" "this" {
+  count      = (var.repository_name != "" && var.repository_policy != null) ? 1 : 0
+  repository = aws_ecr_repository.this[0].name
+  policy     = var.repository_policy
 }

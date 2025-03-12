@@ -26,29 +26,39 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.12.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.90.1 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_complete"></a> [complete](#module\_complete) | ./../../ | n/a |
+| <a name="module_ecr_private"></a> [ecr\_private](#module\_ecr\_private) | ./../../ | n/a |
+| <a name="module_ecr_public"></a> [ecr\_public](#module\_ecr\_public) | ./../../ | n/a |
+| <a name="module_kms"></a> [kms](#module\_kms) | boldlink/kms/aws | 1.2.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_name"></a> [name](#input\_name) | The name of the ECR repository | `string` | `"terraform-aws-ecr-repository"` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_private_ecr_repo_arn"></a> [private\_ecr\_repo\_arn](#output\_private\_ecr\_repo\_arn) | The ARN of the private ECR repository. |
+| <a name="output_private_ecr_repo_name"></a> [private\_ecr\_repo\_name](#output\_private\_ecr\_repo\_name) | The name of the private ECR repository. |
+| <a name="output_private_ecr_repo_url"></a> [private\_ecr\_repo\_url](#output\_private\_ecr\_repo\_url) | The URL of the private ECR repository. |
+| <a name="output_private_ecr_repository_policy"></a> [private\_ecr\_repository\_policy](#output\_private\_ecr\_repository\_policy) | The repository-level policy attached to the private ECR repository. |
+| <a name="output_public_ecr_repo_arn"></a> [public\_ecr\_repo\_arn](#output\_public\_ecr\_repo\_arn) | The ARN of the public ECR repository. |
+| <a name="output_public_ecr_repo_name"></a> [public\_ecr\_repo\_name](#output\_public\_ecr\_repo\_name) | The name of the public ECR repository. |
+| <a name="output_public_ecr_repo_url"></a> [public\_ecr\_repo\_url](#output\_public\_ecr\_repo\_url) | The URL of the public ECR repository. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Third party software
