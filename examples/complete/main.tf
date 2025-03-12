@@ -64,8 +64,6 @@ module "ecr_private" {
     ]
   }
   enable_pull_through_cache_rule = false
-  # ecr_repository_prefix          = ""
-  # upstream_registry_url          = ""
   replication_configuration = {
     rule = {
       destinations = [
