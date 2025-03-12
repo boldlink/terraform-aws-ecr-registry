@@ -58,7 +58,7 @@ resource "aws_ecr_repository" "this" {
   encryption_configuration {
     encryption_type = var.encryption_type
     # When using KMS, specify the kms_key; otherwise, use null.
-    kms_key         = var.encryption_type == "KMS" ? var.kms_key_id : null
+    kms_key = var.encryption_type == "KMS" ? var.kms_key_id : null
   }
 
   tags = var.tags

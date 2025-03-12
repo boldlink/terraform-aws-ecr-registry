@@ -103,5 +103,3 @@ module "ecr_private" {
   })
   depends_on = [module.kms]
 }
-
-
