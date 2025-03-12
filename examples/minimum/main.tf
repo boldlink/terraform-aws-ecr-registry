@@ -4,15 +4,6 @@ provider "aws" {
 }
 
 module "minimum" {
-  source = "./../../"
-  scanning_configuration = {
-    rules = [
-      {
-        scan_frequency = "SCAN_ON_PUSH"
-        repository_filter = {
-          filter      = "*"
-          filter_type = "WILDCARD"
-        }
-    }]
-  }
+  source          = "./../../"
+  repository_name = "terraform-aws-ecr-repository-minimum"
 }

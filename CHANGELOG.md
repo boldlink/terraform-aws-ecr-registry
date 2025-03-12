@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - ...
 
+## [1.1.0] - 2025-03-12
+### Description
+- Feature: Add encryption configuration
+- Feature: Add 
+- Feature: Replication configuration
+- Feature: Pull through cache rules
+
 ## [1.0.0] - 2022-06-09
 ### Description
 - Feature: Registry scanning configuration
