@@ -10,9 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2025-03-12
 ### Description
 - Feature: Add encryption configuration
-- Feature: Add 
-- Feature: Replication configuration
-- Feature: Pull through cache rules
+- Feature: Add repository policy
+- Feature: Update the module examples
 
 ## [1.0.0] - 2022-06-09
 ### Description
@@ -20,8 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Feature: Registry policy
 - Feature: Replication configuration
 - Feature: Pull through cache rules
-- ...
 
-[Unreleased]: https://github.com/boldlink/terraform-aws-ecr-registry/compare/1.0.0...HEAD
-
+[Unreleased]: https://github.com/boldlink/terraform-aws-ecr-registry/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/boldlink/terraform-aws-ecr-registry/releases/tag/1.1.0
 [1.0.0]: https://github.com/boldlink/terraform-aws-ecr-registry/releases/tag/1.0.0
